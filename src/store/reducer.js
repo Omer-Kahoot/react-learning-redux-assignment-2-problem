@@ -5,9 +5,17 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+    console.log(action.name);
+    console.log(action.age);
+    
     switch (action.type) {
         case actionTypes.ADD:
-            return { persons: [...state.persons, action.person] }
+            const newPerson = {
+                id: Math.random(), // not really unique but good enough here!
+                name: action.name,
+                age: Math.floor(action.age)
+            }
+            return { persons: [...state.persons, newPerson] }
         case actionTypes.REMOVE:
             const newPersonsArray = state.persons.filter(el => el.id !== action.id);
             return { persons : newPersonsArray }

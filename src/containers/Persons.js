@@ -29,14 +29,7 @@ class Persons extends Component {
     render () {
         return (
             <div>
-                <AddPerson personAdded={()=>{
-                    const newPerson = {
-                        id: Math.random(), // not really unique but good enough here!
-                        name: 'Omer',
-                        age: Math.floor( Math.random() * 40 )
-                    }
-                    this.props.onAddPerson(newPerson);
-                }} />
+                <AddPerson personAdded={this.props.onAddPerson} />
                 {this.props.persons.map(person => (
                     <Person 
                         key={person.id}
@@ -58,7 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddPerson : (person) => dispatch({type: actionTypes.ADD, person: person}),
+        onAddPerson : (name, age) => dispatch({type: actionTypes.ADD, name : name, age : age}),
         onRemovePerson : (id) => dispatch({type: actionTypes.REMOVE, id : id})
        }
 }
